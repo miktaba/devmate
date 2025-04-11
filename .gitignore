@@ -1,0 +1,97 @@
+# Flutter/Dart/Pub
+**/doc/api/
+**/.dart_tool/
+**/.flutter-plugins
+**/.flutter-plugins-dependencies
+**/build/
+**/ios/Pods/
+**/ios/.symlinks/
+**/.pub/
+**/.pub-cache/
+**/packages
+.packages
+.flutter-plugins
+.flutter-plugins-dependencies
+
+# iOS
+**/ios/Flutter/.last_build_id
+**/ios/Pods/
+**/ios/Runner.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings
+**/ios/Flutter/ephemeral/
+**/ios/Flutter/Generated.xcconfig
+**/ios/Flutter/App.framework
+**/ios/Flutter/Flutter.framework
+**/ios/Flutter/Flutter.podspec
+**/ios/*.mode1v3
+**/ios/*.mode2v3
+**/ios/*.xcuserdatad
+**/ios/*.pbxuser
+**/ios/*.perspectivev3
+**/ios/DerivedData/
+**/ios/.DS_Store
+
+# Android
+**/android/gradle-wrapper.jar
+**/android/.gradle
+**/android/captures/
+**/android/gradlew
+**/android/gradlew.bat
+**/android/local.properties
+**/android/key.properties
+**/android/app/build/
+**/android/app/debug/
+**/android/app/profile/
+**/android/app/release/
+
+# Firebase
+**/android/app/google-services.json
+**/ios/Runner/GoogleService-Info.plist
+
+symlinks/
+
+*.iml
+.idea/
+.vscode/
+*.log
+.DS_Store
+
+# Web 
+**/web/**/lib/generated_plugin_registrant.dart
+
+# macOS
+**/macos/Flutter/GeneratedPluginRegistrant.swift
+**/macos/Flutter/ephemeral
+**/macos/Pods/
+
+# Windows
+**/windows/flutter/ephemeral/
+**/windows/flutter/generated_plugin_registrant.cc
+**/windows/flutter/generated_plugin_registrant.h
+**/windows/flutter/generated_plugins.cmake
+
+# Linux
+**/linux/flutter/ephemeral/
+**/linux/flutter/generated_plugin_registrant.cc
+**/linux/flutter/generated_plugin_registrant.h
+**/linux/flutter/generated_plugins.cmake
+
+# Coverage
+coverage/
+
+# Environment & Secret files
+.env
+.env.local
+.env.development
+.env.production
+*.env.*
+.secret
+secrets.json
+**/lib/config/secrets.dart
+**/lib/config/env.dart
+**/lib/config/keys.dart
+**/lib/core/config/secrets.dart
+**/lib/core/config/env.dart
+**/lib/core/config/keys.dart
+
+# Don't ignore these files to ensure the app still works
+!**/lib/features/github/data/services/github_auth_service.dart
