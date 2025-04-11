@@ -4,6 +4,14 @@
 
 DevMate was born from my desire to immerse myself in the Flutter ecosystem and modern approaches to mobile development. Working on this project, I actively studied not only the framework itself but also integration with external authentication systems and APIs.
 
+<p float="left">
+  <img src="https://github.com/user-attachments/assets/c9321511-4d4a-4bf9-bde3-b036f942be38" width=180" />
+  <img src="https://github.com/user-attachments/assets/f5dea508-5d0b-499b-9502-64d6a3fe2b06" width="180" /> 
+  <img src="https://github.com/user-attachments/assets/66eacd5b-6a34-4493-bcd2-b4d470a140e3" width="180" />
+   <img src="https://github.com/user-attachments/assets/ec526ddf-11f7-40f2-9fb4-fb932bc7182d" width="180" />
+   <img src="https://github.com/user-attachments/assets/1024264a-b3fe-4b6c-a345-8105686ceea3" width="180" />
+</p>
+
 ## Features
 
 - GitHub integration
