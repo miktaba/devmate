@@ -110,13 +110,3 @@ With the help of AI, I was able to overcome many technical obstacles in unfamili
 - AI assistants for solving specific problems
 
 ---
-
-The project is open to code review and improvement suggestions! I would be happy to discuss technical solutions and share experiences.
-
-## Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
