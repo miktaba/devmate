@@ -5,6 +5,7 @@ import 'package:devmate/features/github/domain/entities/github_repository.dart';
 import 'package:devmate/features/github/data/services/github_auth_service.dart';
 import 'package:devmate/features/github/domain/entities/github_todo.dart';
 import 'package:github/github.dart';
+import '../repositories/github_repository_impl.dart';
 
 /// Service for working with GitHub repositories
 class GitHubRepositoryService {
@@ -234,12 +235,22 @@ class GitHubRepositoryService {
 
   /// Getting tasks for a specific repository
   Future<List<GithubTodo>> getRepositoryTodos(String repositoryId) async {
-    // Return an empty list for now, as we need to solve the compilation error
-    // In the real implementation, here will be the logic of working with Hive or another storage
-    if (kDebugMode) {
-      print('Request tasks for repository $repositoryId');
+    try {
+      // Get a repository instance and request tasks
+      final repositoryImpl = GithubRepositoryImpl();
+      final todos = await repositoryImpl.getRepositoryTodos(repositoryId);
+
+      if (kDebugMode) {
+        print('Received ${todos.length} tasks for repository $repositoryId');
+      }
+
+      return todos;
+    } catch (e) {
+      if (kDebugMode) {
+        print('Error during getting tasks for repository: $e');
+      }
+      return [];
     }
-    return [];
   }
 
   /// Getting README file for a repository
@@ -292,9 +303,41 @@ class GitHubRepositoryService {
           print('Received response with a list of files');
         }
 
-        // To temporarily solve the compilation problem, return an empty list
-        // TODO: Realize correct processing of the API response
-        return [];
+        final body = response.body;
+        List<dynamic> data;
+
+        // Check if the response is an array (directory) or an object (file)
+        try {
+          data = json.decode(body) as List<dynamic>;
+        } catch (e) {
+          // If it's not a list, it's probably a file content
+          if (kDebugMode) {
+            print('Response is not a list, probably a file: $e');
+          }
+          return [];
+        }
+
+        // Convert the JSON response to GitHubFile objects
+        final List<GitHubFile> files = [];
+        for (final item in data) {
+          final file = GitHubFile();
+          file.name = item['name'];
+          file.path = item['path'];
+          file.sha = item['sha'];
+          file.size = item['size'];
+          file.type = item['type'];
+          files.add(file);
+        }
+
+        if (kDebugMode) {
+          print('Processed ${files.length} files/directories');
+        }
+
+        return files;
+      } else {
+        if (kDebugMode) {
+          print('Error response: ${response.statusCode} - ${response.body}');
+        }
       }
 
       return [];
@@ -335,37 +378,78 @@ class GitHubRepositoryService {
 
   /// Getting all tasks
   Future<List<GithubTodo>> getAllTodos() async {
-    // Temporary implementation
-    if (kDebugMode) {
-      print('Request all tasks');
+    try {
+      // Get an instance of the repository and request all tasks
+      final repositoryImpl = GithubRepositoryImpl();
+      final todos = await repositoryImpl.getAllTodos();
+
+      if (kDebugMode) {
+        print('Received ${todos.length} tasks');
+      }
+
+      return todos;
+    } catch (e) {
+      if (kDebugMode) {
+        print('Error during getting all tasks: $e');
+      }
+      return [];
     }
-    return [];
   }
 
   /// Updating a task
   Future<GithubTodo> updateTodo(GithubTodo todo) async {
-    // Temporary implementation
-    if (kDebugMode) {
-      print('Updating task: ${todo.id}');
+    try {
+      final repositoryImpl = GithubRepositoryImpl();
+      final updatedTodo = await repositoryImpl.updateTodo(todo);
+
+      if (kDebugMode) {
+        print('Task updated: ${updatedTodo.id}');
+      }
+
+      return updatedTodo;
+    } catch (e) {
+      if (kDebugMode) {
+        print('Error during updating task: $e');
+      }
+      rethrow;
     }
-    return todo;
   }
 
   /// Deleting a task
   Future<bool> deleteTodo(String todoId) async {
-    // Temporary implementation
-    if (kDebugMode) {
-      print('Deleting task: $todoId');
+    try {
+      final repositoryImpl = GithubRepositoryImpl();
+      final result = await repositoryImpl.deleteTodo(todoId);
+
+      if (kDebugMode) {
+        print('Task deleted: $todoId');
+      }
+
+      return result;
+    } catch (e) {
+      if (kDebugMode) {
+        print('Error during deleting task: $e');
+      }
+      return false;
     }
-    return true;
   }
 
   /// Creating a new task
   Future<GithubTodo> createTodo(GithubTodo todo) async {
-    // Temporary implementation
-    if (kDebugMode) {
-      print('Creating task: ${todo.title}');
+    try {
+      final repositoryImpl = GithubRepositoryImpl();
+      final newTodo = await repositoryImpl.createTodo(todo);
+
+      if (kDebugMode) {
+        print('Task created: ${newTodo.id}');
+      }
+
+      return newTodo;
+    } catch (e) {
+      if (kDebugMode) {
+        print('Error during creating task: $e');
+      }
+      rethrow; // Pass the error further for processing in the UI
     }
-    return todo;
   }
 }
